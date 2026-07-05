@@ -6,12 +6,17 @@
 const Party = {
   // クラスsprite番号(キャラシートのセル)
   classSprite: { hero: 0, warrior: 1, mage: 2, priest: 3, thief: 4, monk: 5 },
+  // クラス別の初期装備(最下位の武器+服)
+  starterGear: {
+    hero: 'w_sword1', warrior: 'w_sword1', mage: 'w_stick',
+    priest: 'w_stick', thief: 'w_dagger1', monk: 'w_claw1',
+  },
 
   createActor(id, name, cls) {
     const a = {
       id, name, cls, lv: 1, exp: 0,
       hp: 0, mp: 0,
-      equips: { weapon: null, armor: null, shield: null, acc: null },
+      equips: { weapon: this.starterGear[cls] || null, armor: 'a_clothes', shield: null, acc: null },
     };
     const st = this.baseStats(a);
     a.hp = st.maxhp; a.mp = st.maxmp;

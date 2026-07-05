@@ -90,10 +90,14 @@ class BattleScene {
     AudioSys.playBgm(bgm || (MAPS[Game.state.map].bgm || 'field'));
   }
   update(dt) {
-    this.msg && this.msg.update(dt);
+    // 入力は最前面のUIだけが受け取る(メッセージ > ターゲット選択 > サブメニュー > コマンド)
+    if (this.msg) {
+      this.msg.update(dt);
+      if (this.msg.busy) return;
+    }
+    if (this.targetSel) { this.targetSel.update(dt); return; }
+    if (this.subMenu) { this.subMenu.update(dt); return; }
     if (this.cmdMenu) this.cmdMenu.update(dt);
-    if (this.subMenu) this.subMenu.update(dt);
-    if (this.targetSel) this.targetSel.update(dt);
   }
 
   // ---- セットアップ ----

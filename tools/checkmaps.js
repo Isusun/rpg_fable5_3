@@ -76,4 +76,16 @@ for (const [mapId, x, y, label] of [
   const err = walkable(mapId, x, y);
   if (err) { console.log(`[start ${label}] ${err}`); bad++; }
 }
+// エンカウント設定(enc/zones)のあるマップに、encフラグ付き歩行可能タイルが存在するか
+for (const id of Object.keys(MAPS)) {
+  const m = MAPS[id];
+  if (!m.enc && !m.zones) continue;
+  const ts = TILE_DEFS[m.tileset];
+  let encTiles = 0;
+  for (const row of m.rows) for (const ch of row) {
+    const def = ts[ch];
+    if (def && !def.solid && def.enc) encTiles++;
+  }
+  if (encTiles === 0) { console.log(`[${id}] エンカウント設定があるのにencタイルが0(戦闘が発生しない)`); bad++; }
+}
 console.log(bad ? `\n${bad} problems` : 'ALL OK');

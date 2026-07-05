@@ -43,17 +43,17 @@ const TILE_DEFS = {
     'E': { cell: 14, solid: true },         // テーブル
   },
   dungeon: {
-    ',': { cell: 0 },                       // 石床
+    ',': { cell: 0, enc: true },            // 石床
     '#': { cell: 1, solid: true },          // 壁
-    '<': { cell: 2 },                       // 上り階段
-    '>': { cell: 3 },                       // 下り階段
-    'D': { cell: 4 },                       // 扉(開放済)
+    '<': { cell: 2, enc: true },            // 上り階段
+    '>': { cell: 3, enc: true },            // 下り階段
+    'D': { cell: 4, enc: true },            // 扉(開放済)
     'p': { cell: 11, solid: true },         // 柱
     '_': { cell: 12, solid: true },         // 闇
     '~': { cell: 13, solid: true },         // 地底湖
     'V': { cell: 14, solid: true },         // 溶岩
-    'A': { cell: 15 },                      // 祭壇
-    'k': { cell: 0, tint: 0xdd7788 },       // 赤絨毯(床の色替え)
+    'A': { cell: 15, enc: true },           // 祭壇
+    'k': { cell: 0, tint: 0xdd7788, enc: true }, // 赤絨毯(床の色替え)
   },
 };
 
@@ -68,7 +68,7 @@ function carveMap(w, h, ops) {
 }
 
 // ============ ワールドマップ (60 x 44) プログラム生成 ============
-function buildWorldRows() {
+function buildWorldRows(shadow) {
   const W = 60, H = 44;
   const g = Array.from({ length: H }, () => Array(W).fill('~'));
   const rect = (x1, y1, x2, y2, ch) => { for (let y = y1; y <= y2; y++) for (let x = x1; x <= x2; x++) g[y][x] = ch; };
@@ -139,9 +139,12 @@ function buildWorldRows() {
   rect(28, 29, 28, 32, '~'); rect(34, 29, 34, 32, '~');
   set(31, 30, 'K');                  // 魔王城
   set(31, 33, 'v'); set(31, 34, 'x'); set(31, 35, 'x'); // 結界(オーブ6つで消滅)
+  // 裏世界のみ: 西大陸から暗黒島へ渡る「黄昏の砂州」
+  if (shadow) rect(18, 33, 30, 33, 's');
   return g.map(r => r.join(''));
 }
 const WORLD_ROWS = buildWorldRows();
+const SHADOW_WORLD_ROWS = buildWorldRows(true);
 
 
 // ワールドのエンカウントゾーン ([x1,y1,x2,y2] 順にチェック)
@@ -251,9 +254,9 @@ MAPS.town_karst = {
     'tttttttttttttttttttttt',
     'tggg####g####gggg####t',
     'tggg#,,#g#,,#gggg#,,#t',
-    'tggg#,=Dg#,BDgggg#,=Dt',
+    'tggg#,=Dg#,BDgggg#,=#t',
     'tggg#,,#g#,,#gggg#,,#t',
-    'tggg####g####gggg####t',
+    'tggg####g####gggg#D##t',
     'tgggggg.......gggggggt',
     'tg###gg.ggggg.ggg###gt',
     'tg#,#gg.ggggg.ggg#,#gt',
@@ -569,13 +572,14 @@ MAPS.dun_spire1 = {
     ['set', 9, 4, ','], ['set', 9, 5, ','],            // 内→中央 接続
     ['set', 10, 7, '<'],
     ['set', 9, 15, 'D'],                               // 入口
+    ['set', 17, 2, ','], ['set', 2, 13, ','],          // 宝箱用アルコーブ
     ['set', 7, 8, 'p'], ['set', 12, 8, 'p'],
   ]),
   events: [
     { id: 'sp1_exit', type: 'edge', x: 9, y: 15, to: { map: 'world', x: 54, y: 4 } },
     { id: 'sp1_up', type: 'warp', x: 10, y: 7, to: { map: 'dun_spire2', x: 8, y: 10 } },
-    { id: 'sp1_chest1', type: 'chest', x: 18, y: 1, item: 'herb3', flag: 'chest_sp1' },
-    { id: 'sp1_chest2', type: 'chest', x: 1, y: 14, gold: 800, flag: 'chest_sp2' },
+    { id: 'sp1_chest1', type: 'chest', x: 17, y: 2, item: 'herb3', flag: 'chest_sp1' },
+    { id: 'sp1_chest2', type: 'chest', x: 2, y: 13, gold: 800, flag: 'chest_sp2' },
   ],
 };
 
@@ -711,7 +715,7 @@ MAPS.dun_dark2 = {
 
 // ============ 裏世界: 黄昏のエルデア ============
 MAPS.shadow_world = {
-  id: 'shadow_world', name: '黄昏のエルデア', tileset: 'world', rows: WORLD_ROWS,
+  id: 'shadow_world', name: '黄昏のエルデア', tileset: 'world', rows: SHADOW_WORLD_ROWS,
   bgm: 'shadow', zones: [{ rect: [0, 0, 59, 43], table: 'shadowworld' }], outside: true,
   tint: 0x8877bb,
   events: [
@@ -719,10 +723,10 @@ MAPS.shadow_world = {
     { id: 'sw_sanctum', type: 'warp', x: 31, y: 30, to: { map: 'dun_void', x: 10, y: 14 } },
     { id: 'sw_merchant', type: 'shop', x: 12, y: 24, sprite: 11, shop: 'shadow_shop',
       hello: '…こんな世界でも、商売は続けるさ。いい品があるよ。' },
-    { id: 'sw_item', type: 'shop', x: 32, y: 16, sprite: 11, shop: 'shadow_item',
+    { id: 'sw_item', type: 'shop', x: 10, y: 22, sprite: 11, shop: 'shadow_item',
       hello: '生き残りの商人さ。何か要るかい？' },
-    { id: 'sw_ghost', type: 'npc', x: 49, y: 24, sprite: 12,
-      dialog: ['ここは滅びた可能性のエルデア…', '南の島の「虚無の聖域」に、混沌の神が座している。', '奴を討てば、すべての世界に真の平和が訪れるだろう。'] },
+    { id: 'sw_ghost', type: 'npc', x: 16, y: 30, sprite: 12,
+      dialog: ['ここは滅びた可能性のエルデア…', '南東へ延びる黄昏の砂州の先、暗黒島に「虚無の聖域」がある。', '混沌の神を討てば、すべての世界に真の平和が訪れるだろう。'] },
   ],
 };
 

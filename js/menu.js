@@ -707,16 +707,50 @@ class TavernScene {
     this.drawRoster();
     const menu = new Menu({
       items: [
-        { label: T.tavernCreate }, { label: T.tavernAdd }, { label: T.tavernRemove }, { label: T.tavernLeave },
+        { label: T.tavernCreate }, { label: T.tavernAdd }, { label: T.tavernRemove },
+        { label: T.tavernDelete }, { label: T.tavernLeave },
       ],
-      x: 24, y: 70, w: 250, rowH: 44, visibleRows: 4,
+      x: 24, y: 70, w: 250, rowH: 44, visibleRows: 5,
       onOk: (i) => {
         if (i === 0) this.createFlow();
         else if (i === 1) this.addFlow();
         else if (i === 2) this.removeFlow();
+        else if (i === 3) this.deleteFlow();
         else SceneMgr.pop();
       },
       onCancel: () => SceneMgr.pop(),
+    });
+    this.widgets.push(menu);
+    this.container.addChild(menu.container);
+  }
+  // 仲間の登録抹消(主人公以外・確認つき・装備は所持品へ返却)
+  deleteFlow() {
+    const st = Game.state;
+    const ids = Object.keys(st.roster).filter(id => id !== 'hero1');
+    if (!ids.length) { this.msg.say(T.tavernNoDeletable); return; }
+    this.clearW();
+    this.drawRoster();
+    const menu = new Menu({
+      items: ids.map(id => ({ label: `${st.roster[id].name} (${CLASSES[st.roster[id].cls].name} Lv${st.roster[id].lv})` })),
+      x: 24, y: 70, w: 280, rowH: 40, visibleRows: Math.min(7, ids.length),
+      onOk: async (i) => {
+        const id = ids[i];
+        const a = st.roster[id];
+        await this.msg.say(T.tavernDeleteConfirm(a.name));
+        const c = await this.msg.choice([T.tavernDeleteYes, T.tavernDeleteNo], { cancelIndex: 1 });
+        if (c === 0) {
+          for (const slot of ['weapon', 'armor', 'shield', 'acc']) {
+            if (a.equips[slot]) Game.addItem(a.equips[slot]);
+          }
+          const pi = st.party.indexOf(id);
+          if (pi >= 0) st.party.splice(pi, 1);
+          delete st.roster[id];
+          AudioSys.se('cancel');
+          await this.msg.say(T.tavernDeleted(a.name));
+        }
+        this.showTop();
+      },
+      onCancel: () => this.showTop(),
     });
     this.widgets.push(menu);
     this.container.addChild(menu.container);

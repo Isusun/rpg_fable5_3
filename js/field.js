@@ -186,7 +186,7 @@ class FieldScene {
     if (!def || def.solid) return true;
     const ev = this.eventAt(x, y);
     if (ev) {
-      if (['npc', 'shop', 'inn', 'church', 'tavern', 'ferry', 'rock', 'boss'].includes(ev.type)) {
+      if (['npc', 'shop', 'inn', 'church', 'tavern', 'ferry', 'rock', 'boss', 'chest'].includes(ev.type)) {
         if (ev.type === 'boss' && ev.flag && Game.state.flags[ev.flag]) return false;
         if (ev.hideIf && ev.hideIf(Game.state)) return false;
         return true;
