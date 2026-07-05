@@ -1,0 +1,14 @@
+Use your built-in image generation tool (gpt-image-2) to generate ONE image, then save it to assets/tiles_dungeon.png in the current workspace.
+
+Image spec:
+- 1024x1024 pixels, retro 16-bit JRPG dungeon tileset.
+- The image is EXACTLY a 4x4 grid of 16 square cells, each 256x256 pixels. No gaps, no borders, no gutters, no labels, no text. Each cell completely filled edge-to-edge, top-down view.
+- Dark but readable dungeon palette (grey stone, torch-lit).
+
+Cell contents in reading order (left to right, top to bottom):
+Row 1: (1) grey stone floor tiles texture. (2) dark grey stone brick wall texture. (3) stone stairs going UP (ascending steps, drawn on stone floor). (4) stone stairs going DOWN (dark descending stairwell hole in stone floor).
+Row 2: (5) closed wooden door with iron hinges, on stone floor background. (6) closed golden ornate door with a keyhole, on stone floor background. (7) closed wooden treasure chest with gold trim, centered on grey stone floor background. (8) OPEN wooden treasure chest (lid open, empty inside), centered on grey stone floor background.
+Row 3: (9) large round grey boulder centered on grey stone floor background. (10) a square metal floor switch plate (raised, dull silver) centered on stone floor. (11) the same metal floor switch plate but pressed down and glowing cyan, centered on stone floor. (12) tall stone pillar/column seen top-down on stone floor.
+Row 4: (13) pure black darkness (solid black cell). (14) dark blue underground water. (15) glowing orange lava. (16) a small stone altar/pedestal with a glowing crystal on top, centered on stone floor.
+
+After generating, copy the newest generated PNG into assets/tiles_dungeon.png. Verify the file exists, then stop.

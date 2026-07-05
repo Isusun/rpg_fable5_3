@@ -1,0 +1,14 @@
+Use your built-in image generation tool (gpt-image-2) to generate ONE image, then save it to assets/tiles_town.png in the current workspace.
+
+Image spec:
+- 1024x1024 pixels, retro 16-bit JRPG town/village tileset.
+- The image is EXACTLY a 4x4 grid of 16 square cells, each 256x256 pixels. No gaps, no borders, no gutters, no labels, no text. Each cell completely filled edge-to-edge, top-down view.
+- Warm, readable classic JRPG town palette.
+
+Cell contents in reading order (left to right, top to bottom):
+Row 1: (1) grey stone pavement/cobblestone texture. (2) beige plaster house wall with timber frame (building wall seen from above-front, fills whole cell). (3) same beige plaster wall but with a closed wooden door in the center. (4) wooden shop counter surface, top-down.
+Row 2: (5) warm brown wooden floor planks. (6) one large leafy green tree on grass background. (7) brown wooden fence on grass background. (8) blue water tile with gentle ripples.
+Row 3: (9) green grass lawn texture. (10) small wooden signpost on grass. (11) a bed with red blanket and white pillow, top-down, on wooden floor background. (12) round stone well on grass background.
+Row 4: (13) red carpet with gold trim texture. (14) wooden bookshelf full of colorful books, front view filling the cell. (15) wooden table top-down on wooden floor. (16) grey stone brick texture (castle wall).
+
+After generating, copy the newest generated PNG into assets/tiles_town.png. Verify the file exists, then stop.

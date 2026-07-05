@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>六輝のオーブ - Six Lights of Eldia</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background: #0a0a14; overflow: hidden;
+    touch-action: none;
+    -webkit-user-select: none; user-select: none;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+  }
+  #game-container {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  canvas { display: block; image-rendering: pixelated; }
+  #loading {
+    position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: #e8e0c8; font-size: 18px; z-index: 10; background: #0a0a14;
+    flex-direction: column; gap: 12px;
+  }
+  #loading .bar {
+    width: 240px; height: 10px; border: 2px solid #e8e0c8; border-radius: 4px;
+  }
+  #loading .bar > div { height: 100%; width: 0%; background: #e8e0c8; transition: width .2s; }
+  /* Touch controls */
+  #touch-ui { position: fixed; inset: 0; pointer-events: none; z-index: 5; display: none; }
+  #touch-ui.visible { display: block; }
+  .tbtn {
+    position: absolute; pointer-events: auto;
+    background: rgba(40,40,70,0.5); border: 2px solid rgba(230,225,200,0.6);
+    border-radius: 12px; color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: bold; touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tbtn:active, .tbtn.pressed { background: rgba(120,120,180,0.7); }
+  #dpad { position: absolute; left: 12px; bottom: 16px; width: 168px; height: 168px; pointer-events: none; }
+  #dpad .tbtn { width: 54px; height: 54px; font-size: 24px; }
+  #btn-up    { left: 57px; top: 0; }
+  #btn-down  { left: 57px; bottom: 0; }
+  #btn-left  { left: 0; top: 57px; }
+  #btn-right { right: 0; top: 57px; }
+  #btn-a { right: 20px; bottom: 76px; width: 68px; height: 68px; border-radius: 50%; }
+  #btn-b { right: 100px; bottom: 24px; width: 60px; height: 60px; border-radius: 50%; }
+  #btn-menu { right: 16px; top: 12px; width: 76px; height: 40px; font-size: 15px; border-radius: 8px; }
+  @media (prefers-reduced-motion: reduce) {
+    #loading .bar > div { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div id="game-container"></div>
+<div id="loading" role="status" aria-live="polite">
+  <div>ロード中…</div>
+  <div class="bar"><div id="loadbar"></div></div>
+</div>
+<div id="touch-ui" aria-hidden="true">
+  <div id="dpad">
+    <div class="tbtn" id="btn-up" data-key="ArrowUp">▲</div>
+    <div class="tbtn" id="btn-down" data-key="ArrowDown">▼</div>
+    <div class="tbtn" id="btn-left" data-key="ArrowLeft">◀</div>
+    <div class="tbtn" id="btn-right" data-key="ArrowRight">▶</div>
+  </div>
+  <div class="tbtn" id="btn-a" data-key="Enter">A</div>
+  <div class="tbtn" id="btn-b" data-key="Escape">B</div>
+  <div class="tbtn" id="btn-menu" data-key="Escape">メニュー</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.min.js"></script>
+<script src="js/text.js"></script>
+<script src="js/data.js"></script>
+<script src="js/maps.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/core.js"></script>
+<script src="js/party.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/field.js"></script>
+<script src="js/battle.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+Use your built-in image generation tool (gpt-image-2) to generate ONE image, then save it to assets/title.png in the current workspace.
+
+Image spec:
+- 1536x1024 pixels (landscape), retro 16-bit JRPG title screen background art.
+- Pixel-art style: a dark night fantasy landscape, a lone hero silhouette on a cliff looking toward a distant ominous castle, and SIX glowing orbs floating in the starry sky arranged in an arc, each a different color (green earth, blue water, cyan ice, red flame, jade wind, gold light).
+- Dramatic but not too busy; the center-top area should be relatively dark and calm so a game logo can be overlaid there.
+- ABSOLUTELY NO text, NO letters, NO logo in the image.
+
+After generating, copy the newest generated PNG into assets/title.png. Verify the file exists, then stop.

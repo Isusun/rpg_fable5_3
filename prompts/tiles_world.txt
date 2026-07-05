@@ -1,0 +1,14 @@
+Use your built-in image generation tool (gpt-image-2) to generate ONE image, then save it to assets/tiles_world.png in the current workspace.
+
+Image spec:
+- 1024x1024 pixels, retro 16-bit JRPG overworld tileset.
+- The image is EXACTLY a 4x4 grid of 16 square cells, each 256x256 pixels. No gaps, no borders, no gutters, no labels, no text. Each cell is completely filled edge-to-edge with its own seamless top-down terrain texture.
+- Bright, readable, classic JRPG overworld palette. Top-down view.
+
+Cell contents in reading order (left to right, top to bottom):
+Row 1: (1) green grass plains texture. (2) forest: dense green tree canopy on grass. (3) rocky mountain texture, grey-brown peaks. (4) deep blue sea water with small wave highlights.
+Row 2: (5) yellow desert sand texture. (6) light brown dirt road/path texture. (7) grassy hill: slightly darker bumpy grass mounds. (8) white snow field texture.
+Row 3: (9) dark volcanic rock texture. (10) glowing orange lava texture. (11) wooden plank bridge crossing blue water (planks horizontal). (12) murky green swamp texture.
+Row 4: (13) a tiny village icon: two small red-roofed houses centered on grass background. (14) a small white castle with towers centered on grass background. (15) a dark cave entrance opening in a rocky hillside centered on grass background. (16) an ominous dark purple crystal spire on black rocky ground.
+
+After generating, copy the newest generated PNG into assets/tiles_world.png (create nothing else). Verify the file exists, then stop.

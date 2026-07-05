@@ -1,0 +1,15 @@
+Use your built-in image generation tool (gpt-image-2) to generate ONE image, then save it to assets/chars.png in the current workspace.
+
+Image spec:
+- 1024x1024 pixels, retro 16-bit JRPG character sprite sheet.
+- The image is EXACTLY a 4x4 grid of 16 square cells, each 256x256 pixels. No gaps, no grid lines, no labels, no text.
+- EVERY cell has a SOLID UNIFORM MAGENTA background (#FF00FF) filling the whole cell (this will be chroma-keyed out).
+- In each cell: ONE cute chibi pixel-art RPG character, front-facing, full body, centered, occupying about 80% of the cell height. Consistent style across all 16.
+
+Cell contents in reading order (left to right, top to bottom):
+Row 1: (1) young hero swordsman, green tunic, brown hair, small sword. (2) heavily armored warrior with horned helmet and battle axe. (3) mage with purple pointed hat and robe holding a wand. (4) priest/cleric in white robe with blue trim holding a holy staff.
+Row 2: (5) thief in dark hooded cloak with a dagger. (6) martial-artist monk in orange gi with headband. (7) villager man in simple brown clothes. (8) villager woman with apron and headscarf.
+Row 3: (9) old man elder with long white beard and cane. (10) king with gold crown and red royal robe. (11) guard soldier with silver armor and spear. (12) merchant with a big backpack.
+Row 4: (13) nun/sister in habit. (14) child boy in blue shirt. (15) traveling bard/dancer with colorful clothes. (16) dark hooded wraith with glowing red eyes.
+
+After generating, copy the newest generated PNG into assets/chars.png. Verify the file exists, then stop.

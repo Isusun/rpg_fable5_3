@@ -1,0 +1,15 @@
+Use your built-in image generation tool (gpt-image-2) to generate ONE image, then save it to assets/enemies3.png in the current workspace.
+
+Image spec:
+- 1024x1024 pixels, retro 16-bit JRPG BOSS battle sprite sheet.
+- The image is EXACTLY a 2x2 grid of 4 square cells, each 512x512 pixels. No gaps, no grid lines, no labels, no text.
+- EVERY cell has a SOLID UNIFORM MAGENTA background (#FF00FF) filling the whole cell (for chroma-key).
+- In each cell: ONE large imposing pixel-art BOSS monster, front-facing battle sprite, centered, occupying about 88% of the cell. Consistent epic JRPG final-boss style, detailed and menacing.
+
+Cell contents in reading order:
+Top-left: (1) flame general: giant molten magma warrior with burning greatsword and horned helmet.
+Top-right: (2) demon lord first form: tall elegant dark lord in black-purple robes with pale face, dark aura, floating orbs of shadow.
+Bottom-left: (3) demon lord TRUE form: massive winged demon, purple-black skin, glowing violet chest core, huge bat wings, claws.
+Bottom-right: (4) chaos god: cosmic eldritch deity, swirling galaxy body, multiple glowing golden eyes, ethereal tendrils, crown of stars.
+
+After generating, copy the newest generated PNG into assets/enemies3.png. Verify the file exists, then stop.

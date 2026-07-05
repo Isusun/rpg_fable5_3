@@ -1,0 +1,15 @@
+Use your built-in image generation tool (gpt-image-2) to generate ONE image, then save it to assets/enemies2.png in the current workspace.
+
+Image spec:
+- 1024x1024 pixels, retro 16-bit JRPG enemy/monster battle sprite sheet.
+- The image is EXACTLY a 4x4 grid of 16 square cells, each 256x256 pixels. No gaps, no grid lines, no labels, no text.
+- EVERY cell has a SOLID UNIFORM MAGENTA background (#FF00FF) filling the whole cell (for chroma-key).
+- In each cell: ONE pixel-art monster, front-facing battle sprite, centered, occupying about 85% of the cell. Consistent classic JRPG enemy style. The last 4 (row 4) are BOSSES: more imposing and detailed.
+
+Cell contents in reading order (left to right, top to bottom):
+Row 1: (1) white snow wolf howling, icy breath. (2) bulky ice golem made of blue ice blocks. (3) small blizzard fairy/sprite of swirling snow, pale blue. (4) red fire lizard/salamander breathing a small flame.
+Row 2: (5) turtle with molten lava rock shell. (6) fiery djinn/genie of flame with burning arms. (7) black-armored dark knight with jagged sword. (8) skeletal death mage in tattered dark robe with green magic orb.
+Row 3: (9) grey stone gargoyle with spread wings. (10) shadowy void wraith, wispy black silhouette with white eyes. (11) giant floating abyss eyeball with tentacles, purple. (12) chaos dragon, black scales with rainbow shimmer, wings spread.
+Row 4 (BOSSES): (13) huge rock golem chieftain covered in moss and crystals, glowing eyes. (14) majestic leviathan sea-lord with trident, blue scales. (15) noble wind guardian spirit, green robes swirling with tornado winds. (16) crystalline ice dragon, translucent blue crystal body, elegant.
+
+After generating, copy the newest generated PNG into assets/enemies2.png. Verify the file exists, then stop.

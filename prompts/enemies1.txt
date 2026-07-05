@@ -1,0 +1,15 @@
+Use your built-in image generation tool (gpt-image-2) to generate ONE image, then save it to assets/enemies1.png in the current workspace.
+
+Image spec:
+- 1024x1024 pixels, retro 16-bit JRPG enemy/monster battle sprite sheet.
+- The image is EXACTLY a 4x4 grid of 16 square cells, each 256x256 pixels. No gaps, no grid lines, no labels, no text.
+- EVERY cell has a SOLID UNIFORM MAGENTA background (#FF00FF) filling the whole cell (for chroma-key).
+- In each cell: ONE pixel-art monster, front-facing battle sprite, centered, occupying about 85% of the cell. Consistent classic JRPG enemy style, colorful and readable.
+
+Cell contents in reading order (left to right, top to bottom):
+Row 1: (1) round flat-domed green jelly blob monster with two big round cartoon eyes and a wavy base, NO pointed tip, original design. (2) brown wild rat baring teeth. (3) small purple mischievous bat. (4) green spiky caterpillar.
+Row 2: (5) small earth gnome with a rock club. (6) laughing purple-capped mushroom creature. (7) skeleton soldier with rusty sword and shield. (8) big grey cave spider.
+Row 3: (9) red man-eating crab with big claws. (10) glowing pink jellyfish sorcerer floating. (11) haunted empty knight armor, ghostly blue glow. (12) teal sea serpent rising from water coil.
+Row 4: (13) giant sand worm bursting from the sand, mouth open. (14) desert bandit with scimitar and face wrap. (15) mummy soldier wrapped in bandages. (16) black desert scorpion with raised stinger.
+
+After generating, copy the newest generated PNG into assets/enemies1.png. Verify the file exists, then stop.
